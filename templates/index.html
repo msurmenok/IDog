@@ -1,26 +1,134 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>iDog app</title>
   <link
     rel="icon"
     type="image/png"
     sizes="32x32"
     href="../static/favicon.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="custom.css">
 </head>
 <body>
-  <div id="app">
-    <div id="header">
+    <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="../static/logo_big.png" width="129px" height="42px" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link active" href="#">quisque <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#">rutrum</a>
+        <a class="nav-item nav-link" href="#">porta</a>
+        <a class="nav-item nav-link" href="#">Vehicula</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row hero">
+      <div class="col-md-6 vpad"></div>
+      <div class="col-md-6"></div>
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+        <p>Lorem ipsum accumsan dui massa viverra curabitur libero per fermentum cubilia, fusce nunc urna quisque tortor ut ultricies sit malesuada mi, ac suscipit conubia placerat erat
+        </p>
+      </div>
+      <div class="col-xs-12 hero-image"></div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-xs-12 feature text-center">
+        <button class="btn btn-primary m-3">UPLOAD IMAGE</button>
+        <form>
+          <div class="input-group">
+            <input type="text" class="form-control m-3" placeholder="ZIPCODE">
+            <div class="input-group-btn m-3">
+              <button class="btn btn-primary" type="submit">
+                Go
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row m-3">
+      <div class="col-md-6">
+        <div class="row">
+          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+          <div class="col-xs-12 lpad text-center">
+              <a href="#" class="name">Charlie</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+          <div class="col-xs-12 lpad text-center">
+              <a href="#" class="name">Charlie</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+          <div class="col-xs-12 lpad text-center">
+              <a href="#" class="name">Charlie</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+          <div class="col-xs-12 lpad text-center">
+              <a href="#" class="name">Charlie</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+          <div class="col-xs-12 lpad text-center">
+              <a href="#" class="name">Charlie</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+          <div class="col-xs-12 lpad text-center">
+              <a href="#" class="name">Charlie</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+  
+
+  <!-- <div id="app">
+    <div class="jumbotron text-center" id="header">
       <img src="../static/logo_big.png" alt="iDog logo" width="455"/>
-      <!-- Navigation -->
-      <ul>
+      Navigation
+      ul>
         <li>
           <button>Log in</button>
         </li>
         <li>
           <button>Sign up</button>
         </li>
-        <!-- Navigation after user logged in
+        Navigation after user logged in
             probably user name shouldn't look like a button,
             but more like an underlined text/link
         <li>
@@ -32,24 +140,24 @@
         <li>
           <button>Log out</button>
         </li>
-        -->
+       
       </ul>
-    </div>
-    <div id="body">
-      <!-- picture with four dogs as a background to the instructions -->
+    </div> -->
+<!--     <div id="body">
+      picture with four dogs as a background to the instructions
       <div id="app_intro">
         <p>Lorem ipsum accumsan dui massa viverra curabitur libero per
             fermentum cubilia, fusce nunc urna quisque tortor ut ultricies
             sit malesuada mi, ac suscipit conubia placerat erat
         </p>
       </div>
-      <!-- Part where user can upload image and specify zip code -->
+      Part where user can upload image and specify zip code
       <div id="upload_panel">
         <form>
-          <!-- Can't change "Choose file" to "UPLOAD IMAGE"
+          Can't change "Choose file" to "UPLOAD IMAGE"
               Have an interesting attribute 'capture' to capture
               an image from the device.
-          -->
+         
           <input type="file" name="dogimage" accept="image/png, image/jpeg"
             value="UPLOAD IMAGE" capture>
           <input type="text" name="zipcode" placeholder="zip code">
@@ -73,9 +181,12 @@
           <a href="#"><img src="../static/like_sign_2x.png" width="45" alt="Add to favorites"></a>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Need to set a background for footer -->
-    <div id="footer"></div>
-  </div>
+    <!-- <div id="footer"></div> -->
+  <footer class="footer"></footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
