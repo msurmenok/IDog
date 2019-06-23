@@ -26,7 +26,8 @@ def load_model(model_file_name):
     Returns:
         the loaded model
     """
-    path = os.getcwd()
+    #path = os.getcwd()
+    path = os.path.dirname(os.path.realpath(__file__))
     device = torch.device('cpu')
     model = torchvision.models.resnet18(pretrained=True)
     num_ftrs = model.fc.in_features
