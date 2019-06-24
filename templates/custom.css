@@ -45,7 +45,7 @@
 }
 
 .footer {
-  background-image: url("../resources/bottom_background.png");
+  background-image: url("../static/bottom_background.png");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -61,12 +61,13 @@
 }
 
 .hero {
-  background-image: url("../resources/top_background.png");
+  /*background-image: url("../static/top_background.png");*/
+  background-color: #e7e0de;
 }
 
 .hero-image {
     /* The image used */
-    background-image: url("../resources/dogs_group.png");
+    background-image: url("../static/dogs_group.png");
 
     /* Set a specific height */
     width: 100%;
