@@ -45,7 +45,7 @@
 }
 
 .footer {
-  background-image: url("../static/bottom_background.png");
+  background-image: url("../bottom_background.png");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -67,7 +67,9 @@
 
 .hero-image {
     /* The image used */
-    background-image: url("../static/dogs_group.png");
+    background-image: url("../dogs_group.png");
+    /*background-image: url("/static/bottom_background.png");*/
+    /*background-image: utl("/Users/joseph/Library/Mobile Documents/com~apple~CloudDocs/Documents/2019/CS 160/IDog/static/dogs_group.png");*/
 
     /* Set a specific height */
     width: 100%;
