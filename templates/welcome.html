@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% include "navbar.html" %}
+
+{%block content%}
+<div class="jumbotron">
+    <h1>Welcome!</h1>
+    <p>{{session['username']}}</p>
+
+</div>
+{%endblock%}
