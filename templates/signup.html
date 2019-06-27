@@ -2,10 +2,10 @@
 {% include "navbar.html" %}
 {% from "_formhelpers.html" import render_field %}
 {%block content%}
-<h1> Welcome to the sign up page!</h1>
-<p>Fill out your email address and password to sign up!</p>
+<h1 class='text-center'> Welcome to the sign up page!</h1>
+<div>
 <div class='container'>
-    <form method='POST' action='signup'>
+    <form method='POST' action='signup', style='width:200px; margin:auto'>
         {{ form.csrf_token}}
         <div class='form-group'>
             {{form.hidden_tag()}}
@@ -22,6 +22,7 @@
         </div>
             
     </form>
+</div>
 </div>
 
 {%endblock%}
