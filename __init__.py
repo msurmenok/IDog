@@ -1,7 +1,7 @@
 from flask import (Flask, render_template, url_for, request, redirect, session)
 from wtforms import (Form, TextField, StringField, SubmitField, PasswordField,
                      validators)
-from wtforms.validators import Length
+from wtforms.validators import InputRequired, Email, Length
 from flask_wtf import FlaskForm
 app = Flask(__name__)
 
@@ -14,9 +14,9 @@ def home():
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username')
-    email = StringField('Email')
-    password = PasswordField('Password')
+    username = StringField('Username', validators=[InputRequired()])
+    email = StringField('Email', validators=[Email(message="Please type a valid email address")])
+    password = PasswordField('Password', validators=[Length(min=6, max=20)])
     submit = SubmitField('Sign up')
 
 
