@@ -27,7 +27,7 @@ class RegistrationForm(FlaskForm):
             InputRequired(),
             Length(min=6,
                    max=20,
-                   message="Your password is too short. Minimum 6 letters")
+                   message="Minimum 6 letters required")
         ])
     submit = SubmitField('Sign up')
 
@@ -40,13 +40,13 @@ def signup():
         #username = form.username.data
         session['username'] = form.username.data
         session['email'] = form.email.data
-        return redirect(url_for('login'))
+        return redirect(url_for('welcome'))
     return render_template('signup.html', form=form)
 
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')
 
 
 if __name__ == '__main__':
