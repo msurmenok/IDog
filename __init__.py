@@ -14,9 +14,21 @@ def home():
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired()])
-    email = StringField('Email', validators=[Email(message="Please type a valid email address")])
-    password = PasswordField('Password', validators=[Length(min=6, max=20)])
+    username = StringField('Username',
+                           validators=[InputRequired(),
+                                       Length(min=3, max=20)])
+    email = StringField(
+        'Email',
+        validators=[InputRequired(),
+                    Email(message="Invalid email address")])
+    password = PasswordField(
+        'Password',
+        validators=[
+            InputRequired(),
+            Length(min=6,
+                   max=20,
+                   message="Your password is too short. Minimum 6 letters")
+        ])
     submit = SubmitField('Sign up')
 
 
