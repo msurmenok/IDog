@@ -4,13 +4,6 @@
 {%block content%}
 <h1> Welcome to the sign up page!</h1>
 <p>Fill out your email address and password to sign up!</p>
-<!-- <form action="{{url_for('login')}}"
-    <label for="email">Email:</label>
-    <p><input type="text" name="email"></p>
-    <label for="password">Password:</label>
-    <p><input type="text" name="password"></p>
-    <input type="submit" value="Sign up">
-</form> -->
 <div class='container'>
     <form method='POST' action='signup'>
         {{ form.csrf_token}}
