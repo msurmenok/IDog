@@ -1,38 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>iDog app</title>
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="../static/favicon.png">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
     <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="../static/logo_big.png" width="129px" height="42px" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link active" href="#">quisque <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#">rutrum</a>
-        <a class="nav-item nav-link" href="#">porta</a>
-        <a class="nav-item nav-link" href="#">Vehicula</a>
-      </div>
-    </div>
-  </nav>
-
+{% include "navbar.html" %}
   <div class="container">
     <div class="row hero d-none d-lg-block">
       <div class="col-md-6 vpad"></div>
@@ -118,78 +87,4 @@
       </div>
     </div>
   </div>
-
-
-  <!-- <div id="app">
-    <div class="jumbotron text-center" id="header">
-      <img src="../static/logo_big.png" alt="iDog logo" width="455"/>
-      Navigation
-      ul>
-        <li>
-          <button>Log in</button>
-        </li>
-        <li>
-          <button>Sign up</button>
-        </li>
-        Navigation after user logged in
-            probably user name shouldn't look like a button,
-            but more like an underlined text/link
-        <li>
-          <button>Favorites</button>
-        </li>
-        <li>
-          <button>userName</button>
-        </li>
-        <li>
-          <button>Log out</button>
-        </li>
-
-      </ul>
-    </div> -->
-<!--     <div id="body">
-      picture with four dogs as a background to the instructions
-      <div id="app_intro">
-        <p>Lorem ipsum accumsan dui massa viverra curabitur libero per
-            fermentum cubilia, fusce nunc urna quisque tortor ut ultricies
-            sit malesuada mi, ac suscipit conubia placerat erat
-        </p>
-      </div>
-      Part where user can upload image and specify zip code
-      <div id="upload_panel">
-        <form>
-          Can't change "Choose file" to "UPLOAD IMAGE"
-              Have an interesting attribute 'capture' to capture
-              an image from the device.
-
-          <input type="file" name="dogimage" accept="image/png, image/jpeg"
-            value="UPLOAD IMAGE" capture>
-          <input type="text" name="zipcode" placeholder="zip code">
-          <input type="submit" value="GO">
-        </form>
-      </div>
-      <div id="dogs_container">
-        <div class="dog_profile">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture"></a>
-          <a href="#">Charlie</a>
-          <a href="#"><img src="../static/like_sign_2x.png" width="45" alt="Add to favorites"></a>
-        </div>
-        <div class="dog_profile">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture"></a>
-          <a href="#">Archie</a>
-          <a href="#"><img src="../static/like_sign_2x.png" width="45" alt="Add to favorites"></a>
-        </div>
-        <div class="dog_profile">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture"></a>
-          <a href="#">Rosie</a>
-          <a href="#"><img src="../static/like_sign_2x.png" width="45" alt="Add to favorites"></a>
-        </div>
-      </div>
-    </div> -->
-    <!-- Need to set a background for footer -->
-    <!-- <div id="footer"></div> -->
-  <footer class="footer"></footer>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
