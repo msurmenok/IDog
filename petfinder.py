@@ -106,10 +106,10 @@ def get_dog_json_by_id(id):
 
 # Testing
 # You can specify id or leave the default
-#print(get_dog_by_id())
+#print(get_dog_by_id(45000754))
 
 # You can specify breed or/and zipcode or leave the default
-#print(get_dogs_by_breed())
+#print(get_dogs_by_breed("german shepherd dog", 94065))
 
 # You can specify zipcode or leave the default
-#print(get_dogs())
+#print(get_dogs(94063))
