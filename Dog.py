@@ -15,7 +15,7 @@ class Dog:
       self.city = city
 
     def __str__(self):
-        return "[" + str(self.id) + ", " + self.name + ", " + self.age + ", " + self.city + ", " + str(self.breed1) + ", " + str(self.breed2) +"]\n"
+        return "[" + str(self.id) + ", " + self.name + ", " + self.age + ", " + self.city + ", " + str(self.breed1) + ", " + str(self.breed2) + ", " + str(self.photo_large) + " ]\n"
 
     def __repr__(self):
-        return "[" + str(self.id) + ", " + self.name + ", " + self.age + ", " + self.city + ", " + str(self.breed1) + ", " + str(self.breed2) + "]\n"
+        return "[" + str(self.id) + ", " + self.name + ", " + self.age + ", " + self.city + ", " + str(self.breed1) + ", " + str(self.breed2) + ", " + str(self.photo_large) + "]\n"
