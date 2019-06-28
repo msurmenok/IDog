@@ -3,10 +3,10 @@ from wtforms import (Form, TextField, StringField, SubmitField, PasswordField,
                      validators)
 from wtforms.validators import InputRequired, Email, Length
 from flask_wtf import FlaskForm
+import credentials
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'mykey'
-
+app.config['SECRET_KEY'] = credentials.app_sign_up_key
 
 @app.route('/')
 def home():
@@ -15,20 +15,23 @@ def home():
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
-                           validators=[InputRequired(),
-                                       Length(min=3, max=20)])
+                           validators=[
+                               InputRequired(),
+                               Length(min=3,
+                                      max=20,
+                                      message="The username is too short")
+                           ])
     email = StringField(
         'Email',
         validators=[InputRequired(),
                     Email(message="Invalid email address")])
-    password = PasswordField(
-        'Password',
-        validators=[
-            InputRequired(),
-            Length(min=6,
-                   max=20,
-                   message="Minimum 6 letters required")
-        ])
+    password = PasswordField('Password',
+                             validators=[
+                                 InputRequired(),
+                                 Length(min=6,
+                                        max=20,
+                                        message="Minimum 6 letters required")
+                             ])
     submit = SubmitField('Sign up')
 
 
