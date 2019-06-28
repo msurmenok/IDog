@@ -99,6 +99,7 @@ def _get_dog_json_by_id(id):
     return data['animal']
 
 # Testing
+# Uncomment one print statement at a time
 
 # Find a dog by its PetFinder id
 # You can specify id
@@ -114,4 +115,4 @@ def _get_dog_json_by_id(id):
 
 # Find dogs of any breed sorted by distance to the specified zip code
 # You can specify zipcode or leave the default
-print(get_dogs(94063))
+#print(get_dogs(94063))
