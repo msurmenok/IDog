@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request
 from project import app, db
 from forms import RegistrationForm, LoginForm
 from dbmodel import User
@@ -22,11 +22,6 @@ def signup():
         #useremail = form.email.data
         #username = form.username.data
     return render_template('signup.html', form=form)
-
-@app.route('/welcome')
-@login_required
-def welcome():
-    return render_template('welcome.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
