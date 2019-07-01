@@ -19,16 +19,14 @@ def signup():
                     username=form.username.data,
                     password=form.password.data)
         try:
-            form.check_username(form.username) or form.check_email(
-                form.email)
-            db.session.add(user)
-            db.session.commit()
+            form.check_email(form.email)
             flash("Thank for registration!")
         except validators.ValidationError as e:
             flash(str(e))
-
             return redirect(url_for('signup'))
-
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('login'))
     return render_template('signup.html', form=form)
 
 
