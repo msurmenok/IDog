@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from wtforms import ValidationError
-from project import db
+from dbmodel import User
 
 
 class RegistrationForm(FlaskForm):
@@ -38,10 +38,11 @@ class RegistrationForm(FlaskForm):
             field: field name (email)
         
         Raises:
-            ValidationError: Show error message if the email has been registered
+            ValidationError: Show error message if the email has been 
+            registered
         """
-        if db.Model.User.query.filter_by(email=field.data).first():
-            raise ValidationError('Your email has been already registered!')
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('Your email has already been registered!')
 
     def check_username(self, field):
         """
@@ -53,7 +54,7 @@ class RegistrationForm(FlaskForm):
         Raises:
             ValidationError: show error message if the username has been taken
         """
-        if db.Model.User.query.filter_by(username=field.data).first():
+        if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username is taken!')
 
 
