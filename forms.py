@@ -33,12 +33,12 @@ class RegistrationForm(FlaskForm):
     def check_email(self, field):
         """
         Check if the email has been registered
-        
+
         Arguments:
             field: field name (email)
-        
+
         Raises:
-            ValidationError: Show error message if the email has been 
+            ValidationError: Show error message if the email has been
             registered
         """
         if User.query.filter_by(email=field.data).first():
@@ -47,10 +47,10 @@ class RegistrationForm(FlaskForm):
     def check_username(self, field):
         """
         Check if the username has been taken
-        
+
         Arguments:
             field: field name (user)
-        
+
         Raises:
             ValidationError: show error message if the username has been taken
         """

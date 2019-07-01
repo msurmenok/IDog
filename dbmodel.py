@@ -1,4 +1,4 @@
-from project import db, login_manager
+from __init__ import db, login_manager
 # help to generate hash funciton for password
 from werkzeug.security import generate_password_hash, check_password_hash
 # UserMixin helps to manage user login and user autherization
@@ -9,10 +9,10 @@ from flask_login import UserMixin
 def load_user(user_id):
     """
     Load the current user after the user logged in
-     
+
     Arguments:
         user_id {integer} -- user id
-    
+
     Returns:
         user table based on the user id
     """
@@ -35,4 +35,3 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
