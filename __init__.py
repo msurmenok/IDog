@@ -3,7 +3,7 @@ from project import app, db
 from forms import RegistrationForm, LoginForm
 from dbmodel import User
 from flask_login import login_user, login_required, logout_user
-from wtforms import validators, ValidationError
+from wtforms import validators
 
 
 @app.route('/')
