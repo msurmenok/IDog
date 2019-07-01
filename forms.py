@@ -42,20 +42,20 @@ class RegistrationForm(FlaskForm):
             registered
         """
         if User.query.filter_by(email=field.data).first():
-            raise ValidationError('Your email has already been registered!')
+            raise ValidationError('Your email has been already registered!')
 
-    def check_username(self, field):
-        """
-        Check if the username has been taken
+    # def check_username(self, field):
+    #     """
+    #     Check if the username has been taken
 
-        Arguments:
-            field: field name (user)
+    #     Arguments:
+    #         field: field name (user)
 
-        Raises:
-            ValidationError: show error message if the username has been taken
-        """
-        if User.query.filter_by(username=field.data).first():
-            raise ValidationError('Username is taken!')
+    #     Raises:
+    #         ValidationError: show error message if the username has been taken
+    #     """
+    #     if User.query.filter_by(username=field.data).first():
+    #         raise ValidationError('Username is taken!')
 
 
 class LoginForm(FlaskForm):
