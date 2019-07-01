@@ -10,6 +10,11 @@
     </button>
 </div>
 {% endfor %}
+
+{% if current_user.is_authenticated %}
+
+<h1 class='text-center'> You already logged in</h1>
+{% else %}
 <h1 class='text-center'> Welcome to the sign up page!</h1>
 <div>
 <div class='container'>
@@ -35,5 +40,5 @@
     </form>
 </div>
 </div>
-
+{% endif %}
 {%endblock%}
