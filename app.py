@@ -1,13 +1,41 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, Flask, send_from_directory
+from werkzeug.utils import secure_filename
 from __init__ import app, db
+from model.load_model import run_model
 from forms import RegistrationForm, LoginForm
 from dbmodel import User
 from flask_login import login_user, login_required, logout_user
 from wtforms import validators
 
+import os
 
-@app.route('/')
+os.environ['PYTHONPATH'] = os.getcwd()
+# UPLOAD_FOLDER = "/static"
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static/tmp')
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
+            return render_template("index.html", breed=prediction, path=filename)
     return render_template('index.html')
 
 
