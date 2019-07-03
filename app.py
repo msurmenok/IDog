@@ -11,8 +11,8 @@ import os
 
 os.environ['PYTHONPATH'] = os.getcwd()
 # UPLOAD_FOLDER = "/static"
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static')
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static/tmp')
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -35,7 +35,7 @@ def index():
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
-            return render_template('prediction.html', breed=prediction, path=filename)
+            return render_template("index.html", breed=prediction, path=filename)
     return render_template('index.html')
 
 
