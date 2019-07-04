@@ -82,13 +82,12 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/my_dogs/<username>')
-def user_fav_page(username):
+@app.route('/my_dogs/')
+def user_fav_page():
     # page = request.args.get('page', 1, type=int)
-    if username == current_user.username:
-        user = User.query.filter_by(email=current_user.email).first_or_404()
+    user = User.query.filter_by(email=current_user.email).first_or_404()
     # grab the first user or return a 404 page
-        return render_template('welcome.html', user=user)
+    return render_template('welcome.html', user=user)
 
 
 @app.route('/logout')
