@@ -36,7 +36,9 @@ def index():
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
             return render_template("index.html", breed=prediction, path=filename)
-    return render_template('index.html', ip_address=request.remote_addr)
+    print(request.remote_addr)
+    print(request.access_route[0])
+    return render_template('index.html', ip_address=request.access_route[0])
 
 
 @app.route('/signup', methods=['GET', 'POST'])
