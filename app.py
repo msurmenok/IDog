@@ -9,6 +9,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from wtforms import validators
 
 import os
+import geoip2.database
 
 os.environ['PYTHONPATH'] = os.getcwd()
 # UPLOAD_FOLDER = "/static"
@@ -22,8 +23,22 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def get_zipcode(request):
+    """ Find zip code based on user ip using geoip2 library.
+        If can't find zip code for provided ip, return zip code for SJSU
+    """
+    user_ip = request.access_route[0]
+    reader = geoip2.database.Reader(os.path.dirname(os.path.abspath(__file__)) + '/geolite2/GeoLite2-City.mmdb')
+    try:
+        response = reader.city(user_ip)
+        return response.postal.code
+    except geoip2.errors.AddressNotFoundError:
+        return '95192'
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    zipcode = get_zipcode(request)
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -39,10 +54,13 @@ def index():
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
+
             return render_template("index.html",
                                    breed=prediction,
-                                   path=filename)
-    return render_template('index.html')
+                                   path=filename,
+                                   zipcode=zipcode)
+    # Find zip code for GET request
+    return render_template('index.html', zipcode=zipcode)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
