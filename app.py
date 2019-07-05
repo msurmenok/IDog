@@ -1,10 +1,11 @@
-from flask import render_template, redirect, url_for, flash, request, Flask, send_from_directory
+from flask import (render_template, redirect, url_for, flash, request, Flask,
+                   send_from_directory)
 from werkzeug.utils import secure_filename
 from __init__ import app, db
 from model.load_model import run_model
 from forms import RegistrationForm, LoginForm
 from dbmodel import User
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from wtforms import validators
 
 import os
@@ -12,14 +13,16 @@ import geoip2.database
 
 os.environ['PYTHONPATH'] = os.getcwd()
 # UPLOAD_FOLDER = "/static"
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static/tmp')
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                             'static/tmp')
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
+
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
+  
 def get_zipcode(request):
     """ Find zip code based on user ip using geoip2 library.
         If can't find zip code for provided ip, return zip code for SJSU
@@ -32,7 +35,7 @@ def get_zipcode(request):
     except geoip2.errors.AddressNotFoundError:
         return '95192'
 
-
+      
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -50,7 +53,10 @@ def index():
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
-            return render_template("index.html", breed=prediction, path=filename)
+
+            return render_template("index.html",
+                                   breed=prediction,
+                                   path=filename)
     # Find zip code for GET request
     zipcode = get_zipcode(request)
     return render_template('index.html', zipcode=zipcode)
@@ -91,6 +97,16 @@ def login():
         else:
             flash('Your email or password doesn\'t match the record')
     return render_template('login.html', form=form)
+
+
+@app.route('/my_dogs/')
+def user_fav_page():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    # page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(email=current_user.email).first_or_404()
+    # grab the first user or return a 404 page
+    return render_template('welcome.html', user=user)
 
 
 @app.route('/logout')

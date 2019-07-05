@@ -89,6 +89,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+idogenv/
 
 # Spyder project settings
 .spyderproject
@@ -107,3 +108,5 @@ venv.bak/
 
 # credentials
 credentials.py
+
+static/tmp/
