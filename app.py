@@ -22,7 +22,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-  
+
 def get_zipcode(request):
     """ Find zip code based on user ip using geoip2 library.
         If can't find zip code for provided ip, return zip code for SJSU
@@ -35,9 +35,10 @@ def get_zipcode(request):
     except geoip2.errors.AddressNotFoundError:
         return '95192'
 
-      
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    zipcode = get_zipcode(request)
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -56,9 +57,9 @@ def index():
 
             return render_template("index.html",
                                    breed=prediction,
-                                   path=filename)
+                                   path=filename,
+                                   zipcode=zipcode)
     # Find zip code for GET request
-    zipcode = get_zipcode(request)
     return render_template('index.html', zipcode=zipcode)
 
 
