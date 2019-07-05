@@ -84,6 +84,8 @@ def login():
 
 @app.route('/my_dogs/')
 def user_fav_page():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
     # page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(email=current_user.email).first_or_404()
     # grab the first user or return a 404 page
