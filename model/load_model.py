@@ -61,7 +61,7 @@ def process_image(image_file):
         transforms.ToTensor(),
         transforms.Normalize([0.4910, 0.4593, 0.4196], [0.229, 0.224, 0.225])
     ])
-    if image_file.rsplit('.', 1)[1] == 'png':
+    if image_file.rsplit('.', 1)[1].lower() == 'png':
         im = Image.open(Path(image_file))
         image = im.convert('RGB')
         #image.save(image_file.rsplit('.', 1)[0] + '.jpg')
