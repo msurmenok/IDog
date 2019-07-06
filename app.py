@@ -15,7 +15,7 @@ os.environ['PYTHONPATH'] = os.getcwd()
 # UPLOAD_FOLDER = "/static"
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                              'static/tmp')
-ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png'])
 
 
 def allowed_file(filename):
@@ -28,7 +28,9 @@ def get_zipcode(request):
         If can't find zip code for provided ip, return zip code for SJSU
     """
     user_ip = request.access_route[0]
-    reader = geoip2.database.Reader(os.path.dirname(os.path.abspath(__file__)) + '/geolite2/GeoLite2-City.mmdb')
+    reader = geoip2.database.Reader(
+        os.path.dirname(os.path.abspath(__file__)) +
+        '/geolite2/GeoLite2-City.mmdb')
     try:
         response = reader.city(user_ip)
         return response.postal.code
