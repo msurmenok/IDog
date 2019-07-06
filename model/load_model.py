@@ -64,9 +64,9 @@ def process_image(image_file):
     if image_file.rsplit('.', 1)[1].lower() == 'png':
         im = Image.open(Path(image_file))
         image = im.convert('RGB')
-        #image.save(image_file.rsplit('.', 1)[0] + '.jpg')
     else:
         image = Image.open(Path(image_file))
+    image.save(image_file, quality=10, optimizer=True)
     image_processed = simple_transform(image)
     image = image_processed.view(1, 3, 224, 224)
     return image
