@@ -10,6 +10,7 @@ from wtforms import validators
 
 import os
 import geoip2.database
+import petfinder
 
 os.environ['PYTHONPATH'] = os.getcwd()
 # UPLOAD_FOLDER = "/static"
@@ -60,7 +61,8 @@ def index():
                                    path=filename,
                                    zipcode=zipcode)
     # Find zip code for GET request
-    return render_template('index.html', zipcode=zipcode)
+    dogs = petfinder.get_dogs(zipcode)
+    return render_template('index.html', zipcode=zipcode, dogs=dogs)
 
 
 @app.route('/signup', methods=['GET', 'POST'])

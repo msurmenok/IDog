@@ -57,60 +57,19 @@
       </div>
     </div>
     <div class="row m-3">
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+    {% for dog in dogs %}
+      <div class="col-md-6 col-lg-4">
+
+          <a href="#/dog/{{ dog.id }}">
+            <img src="{{ dog.photo_large }}" alt="dog picture" class="dog-image" width="100%">
+          </a>
           <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+              <a href="#/dog/{{ dog.id }}" class="name">{{ dog.name }}</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="25" alt="Add to favorites"></a>
           </div>
-        </div>
+
       </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
+    {% endfor %}
     </div>
   </div>
 {% endblock %}
