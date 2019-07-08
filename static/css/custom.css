@@ -41,7 +41,21 @@
 .lpad {
   margin: 0 auto;
   text-align: center;
-  padding: 5% 0% 10% 0%;
+  padding: 10% 0% 0% 0%;
+}
+
+.image{
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+.image img {
+  position: absolute;
+}
+
+.dog-container {
+  margin-bottom: 30px;
 }
 
 .footer {
