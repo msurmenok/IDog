@@ -23,6 +23,7 @@ breeds_dict = {
     'labrador_retriever': 3
 }
 
+
 def load_model(model_file_name):
     """
     Load the model
@@ -60,7 +61,12 @@ def process_image(image_file):
         transforms.ToTensor(),
         transforms.Normalize([0.4910, 0.4593, 0.4196], [0.229, 0.224, 0.225])
     ])
-    image = Image.open(Path(image_file))
+    if image_file.rsplit('.', 1)[1].lower() == 'png':
+        im = Image.open(Path(image_file))
+        image = im.convert('RGB')
+    else:
+        image = Image.open(Path(image_file))
+    image.save(image_file, quality=10, optimizer=True)
     image_processed = simple_transform(image)
     image = image_processed.view(1, 3, 224, 224)
     return image
@@ -80,11 +86,13 @@ def predict(model, processed_image):
     prediction = int(torch.max(output.data, 1)[1].numpy())
     return prediction
 
+
 def run_model(image_path):
     model = load_model('trained_model_Jun21.pth')
     image = process_image(image_path)
     prediction = predict(model, image)
     return list(breeds_dict.keys())[prediction]
+
 
 def main():
 
