@@ -1,8 +1,15 @@
 {% extends "base.html" %}
-
+{% block content %}
     <!-- Navigation -->
 {% include "navbar.html" %}
 {% block content %}
+
+{% if breed is defined %}
+<script>
+  window.location.hash = "#" + "prediction";
+</script>
+{% endif %}
+
 {% for message in get_flashed_messages()%}
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>{{message}}</strong>
@@ -58,60 +65,23 @@
       </div>
     </div>
     <div class="row m-3">
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
+    {% for dog in dogs %}
+      <div class="col-md-6 col-lg-4">
+        <div class="img-thumbnail dog-container">
+          <a href="#/dog/{{ dog.id }}">
+            <div class="image">
+              <span class="helper"></span>
+              <img src="{{ dog.photo_large }}" alt="dog picture" class="dog-image" width="100%">
+            </div>
+          </a>
           <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
+              <a href="#/dog/{{ dog.id }}" class="name">{{ dog.name }}</a>
+              <a href="#"><img src="../static/like_sign_2x.png" width="35" alt="Add to favorites"></a>
+              <p>{{ dog.gender }} &bull; {{ dog.age }}</p>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <a href="#"><img src="../static/dogs/dog1.png" alt="dog picture" class="dog-image" width="100%"></a>
-          <div class="col-xs-12 lpad text-center">
-              <a href="#" class="name">Charlie</a>
-              <a href="#"><img src="../static/like_sign_2x.png" width="15%" alt="Add to favorites"></a>
-          </div>
-        </div>
-      </div>
+    {% endfor %}
     </div>
   </div>
 {% endblock %}
