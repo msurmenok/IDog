@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for, flash, request, Flask, sen
 from werkzeug.utils import secure_filename
 from __init__ import app, db
 from model.load_model import run_model
+from petfinder import get_dogs_by_breed
 from forms import RegistrationForm, LoginForm
 from dbmodel import User
 from flask_login import login_user, login_required, logout_user
@@ -35,7 +36,22 @@ def index():
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
-            return render_template("index.html", breed=prediction, path=filename)
+
+            if 'text' in request.form:
+                # zipcode = request.form['text']
+                zipcode = 95133
+                # dog = get_dogs_by_breed(prediction, zipcode)[0]
+                dogs = get_dogs_by_breed()
+                dog = dogs[0]
+
+            return render_template("index.html",
+                                    breed=prediction,
+                                    path=filename,
+                                    name=dog.name,
+                                    dogpath=dog.photo_large,
+                                    phone=dog.phone,
+                                    zipcode=zipcode
+                                    )
     return render_template('index.html')
 
 
