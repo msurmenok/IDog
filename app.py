@@ -61,9 +61,9 @@ def index():
 
             if 'text' in request.form:
                 # zipcode = request.form['text']
-                zipcode = 95133
+                zipcode = 94065 # default
                 # dog = get_dogs_by_breed(prediction, zipcode)[0]
-                dogs = get_dogs_by_breed()
+                dogs = get_dogs_by_breed() # default german shepard, 94065
                 dog = dogs[0]
 
             return render_template("index.html",
@@ -72,9 +72,11 @@ def index():
                                     name=dog.name,
                                     dogpath=dog.photo_large,
                                     phone=dog.phone,
-                                    zipcode=zipcode
+                                    zipcode=zipcode,
+                                    dogs=dogs
                                     )
-    return render_template('index.html')
+    dogs = petfinder.get_dogs(zipcode)
+    return render_template('index.html', zipcode=zipcode, dogs=dogs)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
