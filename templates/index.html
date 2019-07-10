@@ -3,8 +3,6 @@
     <!-- Navigation -->
 {% include "navbar.html" %}
 
-
-
 {% if breed is defined %}
 <script>
   window.location.hash = "#" + "prediction";
@@ -32,7 +30,6 @@
     </div>
     <div class="row mt-5">
       <div class="col-xs-12 feature text-center">
-        <a name="prediction">
         {% if breed is defined %}
         <div class="d-flex justify-content-center m-3">
         	<h1>It is a {{ breed }}!</h1>
@@ -41,12 +38,22 @@
         	<img style="max-height:500px;max-width:500px;height:auto;width:auto;" src="/static/tmp/{{ path }}">
         </div>
         {% endif %}
-        </a>
+        {% if name is defined %}
+        <div class="d-flex justify-content-center m-3">
+        	<h1>Meet {{ name }}! {{ name }} is available for adoption near {{ zipcode }}.</h1>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+        	<img style="max-height:500px;max-width:500px;height:auto;width:auto;" src="{{ dogpath }}">
+        </div>
+        <div class="d-flex justify-content-center m-3">
+        	<h1>For more info, call: {{ phone }}!</h1>
+        </div>
+        {% endif %}
         <form method=post enctype=multipart/form-data>
           <input type=file name=file value="Upload Image" class="btn btn-primary">
          <!--  <input type=submit value="Upload Image" class="btn btn-primary"> -->
           <div class="input-group">
-            <input type="text" class="form-control m-3" placeholder="ZIPCODE" value="{{zipcode}}">
+            <input type="text" name=text class="form-control m-3" placeholder="ZIPCODE" value="{{zipcode}}">
             <div class="input-group-btn m-3">
               <button class="btn btn-primary" type="submit">
                 Submit

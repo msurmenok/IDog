@@ -3,6 +3,7 @@ from flask import (render_template, redirect, url_for, flash, request, Flask,
 from werkzeug.utils import secure_filename
 from __init__ import app, db
 from model.load_model import run_model
+from petfinder import get_dogs_by_breed
 from forms import RegistrationForm, LoginForm
 from dbmodel import User
 from flask_login import login_user, login_required, logout_user, current_user
@@ -58,14 +59,24 @@ def index():
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
 
+            if 'text' in request.form:
+                # zipcode = request.form['text']
+                zipcode = 94065 # default
+                # dog = get_dogs_by_breed(prediction, zipcode)[0]
+                dogs = get_dogs_by_breed() # default german shepard, 94065
+                dog = dogs[0]
+
             return render_template("index.html",
-                                   breed=prediction,
-                                   path=filename,
-                                   zipcode=zipcode)
-    # Find zip code for GET request
+                                    breed=prediction,
+                                    path=filename,
+                                    name=dog.name,
+                                    dogpath=dog.photo_large,
+                                    phone=dog.phone,
+                                    zipcode=zipcode,
+                                    dogs=dogs
+                                    )
     dogs = petfinder.get_dogs(zipcode)
     return render_template('index.html', zipcode=zipcode, dogs=dogs)
-
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
