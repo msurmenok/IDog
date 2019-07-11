@@ -20,13 +20,14 @@ def load_user(user_id):
 
 
 class User(db.Model, UserMixin):
-
+    
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    favs = db.relationship('Favorites', backref='fav_users')
 
     def __init__(self, email, username, password):
         self.email = email
@@ -35,3 +36,53 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return f'User id:{self.id}, username:{self.username}'
+
+    def check_favs(self):
+        if self.favs:
+            for each in self.favs:
+                print(each.dog_id)
+
+
+class Favorites(db.Model):
+    __tablename__ = 'favs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'),
+                        nullable=False)
+    dog_id = db.Column(db.Integer, nullable=False, index=True)
+    users = db.relationship('User', backref='user_favs')
+
+    def __init__(self, user_id, dog_id):
+        self.user_id = user_id
+        self.dog_id = dog_id
+
+    def __repr__(self):
+        return f'{self.dog_id}'
+
+
+class Dogs(db.Model):
+    __tablename__ = 'dogs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    dog_id = db.Column(db.Integer, unique=True)
+    dog_name = db.Column(db.String)
+    dog_gender = db.Column(db.String)
+    dog_age = db.Column(db.String)
+    dog_pic = db.Column(db.String)
+    #users = db.relationship('User', 'dog_info')
+
+    def __init__(self, dog_id, dog_name, dog_gender, dog_age, dog_pic):
+        self.dog_id = dog_id
+        self.dog_name = dog_name
+        self.dog_gender = dog_gender
+        self.dog_age = dog_age
+        self.dog_pic = dog_pic
+
+    def __repr__(self):
+        return f'This dog id = {self.dog_id}, name = {self.dog_name}' \
+                f'age = {self.dog_age}, gender = {self.dog_gender}, ' \
+                f'dog pic = {self.dog_pic}'
