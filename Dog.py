@@ -1,6 +1,14 @@
 class Dog:
     def __init__(self, id, org_id, breed1, breed2, age, gender, spayed,
                  name, photo_thumbnail, email, phone, city, photos, environment, description, address):
+        """
+        environment:
+            if the dog is good with other children, dogs, and cats
+            is a dictionary {"children": true, "dogs": None,"cats": false}
+            where None means no information
+        photos:
+            each element in photos is a dictionary with keys "small", "medium", "large", "full"
+        """
         self.id = id
         self.org_id = org_id
         self.breed1 = breed1
