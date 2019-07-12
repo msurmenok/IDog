@@ -52,7 +52,6 @@ class Favorites(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    dog_id = db.Column(db.Integer, nullable=False, index=True)
     dog_id = db.Column(db.Integer,
                        db.ForeignKey('dogs.dog_id'),
                        nullable=False,
