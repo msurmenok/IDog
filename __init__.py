@@ -3,6 +3,10 @@ from flask import Flask
 import sys
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import UniqueConstraint
+from werkzeug.security import generate_password_hash, check_password_hash
+# UserMixin helps to manage user login and user autherization
+from flask_login import UserMixin
 # helps to update database if tables are modified after the database is created
 from flask_migrate import Migrate
 # helps to automate login system
@@ -10,6 +14,9 @@ from flask_login import LoginManager
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from sqlite3 import Connection as SQLite3Connection
+from werkzeug.security import generate_password_hash, check_password_hash
+# UserMixin helps to manage user login and user autherization
+from flask_login import UserMixin
 
 sys.path.append('')
 sys.path.append('../')
@@ -37,6 +44,5 @@ def _set_sqlite_pragma(dbapi_connection, connection_record):
 
 
 Migrate(app, db)
-
 login_manager.init_app(app)
 login_manager.login_view = 'login'  # user will go to 'login' view to login
