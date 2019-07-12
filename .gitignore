@@ -110,3 +110,6 @@ idogenv/
 credentials.py
 
 static/tmp/
+
+# IDE
+.idea
