@@ -1,6 +1,6 @@
 class Dog:
     def __init__(self, id, org_id, breed1, breed2, age, gender, spayed,
-                 name, photo_thumbnail, email, phone, city):
+                 name, photo_thumbnail, email, phone, city, photos, environment, description, address):
         self.id = id
         self.org_id = org_id
         self.breed1 = breed1
@@ -13,6 +13,10 @@ class Dog:
         self.email = email
         self.phone = phone
         self.city = city
+        self.photos = photos
+        self.environment = environment
+        self.description = description
+        self.address = address
 
     def __str__(self):
         return "[" + str(self.id) + ", " + self.name + ", " + self.age + ", " + self.city + ", " + str(
@@ -29,6 +33,38 @@ class Dog:
                and self.email == other.email and self.phone == other.phone and self.city == other.city
 
     # Getters and setters
+    @property
+    def photos(self):
+        return self.__photos
+
+    @photos.setter
+    def photos(self, photos):
+        self.__photos = photos
+
+    @property
+    def environment(self):
+        return self.__environment
+
+    @environment.setter
+    def environment(self, environment):
+        self.__environment = environment
+
+    @property
+    def description(self):
+        return self.__description
+
+    @description.setter
+    def description(self, description):
+        self.__description = description
+
+    @property
+    def address(self):
+        return self.__address
+
+    @address.setter
+    def address(self, address):
+        self.__address = address
+
     @property
     def id(self):
         return self.__id
