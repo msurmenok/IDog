@@ -3,6 +3,7 @@ from __init__ import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 # UserMixin helps to manage user login and user autherization
 from flask_login import UserMixin
+from sqlalchemy import UniqueConstraint
 
 
 @login_manager.user_loader
@@ -50,14 +51,13 @@ class Favorites(db.Model):
     __tablename__ = 'favs'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer,
-                        db.ForeignKey('users.id'),
-                        nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     dog_id = db.Column(db.Integer, nullable=False, index=True)
     dog_id = db.Column(db.Integer,
                        db.ForeignKey('dogs.dog_id'),
                        nullable=False,
                        index=True)
+    __table_args__ = (UniqueConstraint('user_id', 'dog_id', name='fav_pair'), )
     users = db.relationship('User', backref='user_favs')
 
     def __init__(self, user_id, dog_id):
