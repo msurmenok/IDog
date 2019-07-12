@@ -20,7 +20,7 @@ def load_user(user_id):
 
 
 class User(db.Model, UserMixin):
-    
+
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -54,6 +54,10 @@ class Favorites(db.Model):
                         db.ForeignKey('users.id'),
                         nullable=False)
     dog_id = db.Column(db.Integer, nullable=False, index=True)
+    dog_id = db.Column(db.Integer,
+                       db.ForeignKey('dogs.dog_id'),
+                       nullable=False,
+                       index=True)
     users = db.relationship('User', backref='user_favs')
 
     def __init__(self, user_id, dog_id):
@@ -67,12 +71,13 @@ class Favorites(db.Model):
 class Dogs(db.Model):
     __tablename__ = 'dogs'
 
-    id = db.Column(db.Integer, primary_key=True)
-    dog_id = db.Column(db.Integer, unique=True)
+    #id = db.Column(db.Integer, primary_key=True)
+    dog_id = db.Column(db.Integer, primary_key=True)
     dog_name = db.Column(db.String)
     dog_gender = db.Column(db.String)
     dog_age = db.Column(db.String)
     dog_pic = db.Column(db.String)
+
     #users = db.relationship('User', 'dog_info')
 
     def __init__(self, dog_id, dog_name, dog_gender, dog_age, dog_pic):
