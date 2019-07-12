@@ -70,7 +70,7 @@ def index():
                                     breed=prediction,
                                     path=filename,
                                     name=dog.name,
-                                    dogpath=dog.photo_large,
+                                    dogpath=dog.photo_thumbnail,
                                     phone=dog.phone,
                                     zipcode=zipcode,
                                     dogs=dogs

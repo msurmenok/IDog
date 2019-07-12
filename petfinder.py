@@ -40,9 +40,9 @@ def get_dog_by_id(id="43736184"):
 def _convert_to_dog(element):
     """ Convert information about one dog (returned from API call) to the object of type Dog """
     # Check if photo is available (sometimes there is no picture of a dog)
-    photo = None
+    photo_thumbnail = None
     if (len(element["photos"]) > 0):
-        photo = element["photos"][0]["large"]
+        photo_thumbnail = element["photos"][0]["large"]
 
     return Dog( element["id"],
                 element["organization_id"],
@@ -52,7 +52,7 @@ def _convert_to_dog(element):
                 element["gender"],
                 element["attributes"]["spayed_neutered"],
                 element["name"],
-                photo,
+                photo_thumbnail,
                 element["contact"]["email"],
                 element["contact"]["phone"],
                 element["contact"]["address"]["city"]
