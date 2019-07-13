@@ -3,7 +3,6 @@ from flask import (render_template, redirect, url_for, flash, request, Flask,
 from werkzeug.utils import secure_filename
 from __init__ import app, db
 from model.load_model import run_model
-from petfinder import get_dogs_by_breed
 from forms import RegistrationForm, LoginForm
 from dbmodel import User
 from flask_login import login_user, login_required, logout_user, current_user
@@ -11,13 +10,15 @@ from wtforms import validators
 
 import os
 import geoip2.database
-import petfinder
+from petfinder import PetFinderClient
 
 os.environ['PYTHONPATH'] = os.getcwd()
 # UPLOAD_FOLDER = "/static"
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                              'static/tmp')
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png'])
+
+petfinder = PetFinderClient()
 
 
 def allowed_file(filename):
@@ -63,7 +64,7 @@ def index():
                 # zipcode = request.form['text']
                 zipcode = 94065  # default
                 # dog = get_dogs_by_breed(prediction, zipcode)[0]
-                dogs = get_dogs_by_breed()  # default german shepard, 94065
+                dogs = petfinder.get_dogs_by_breed()  # default german shepard, 94065
                 dog = dogs[0]
 
             return render_template("index.html",
@@ -73,7 +74,7 @@ def index():
                                    dogpath=dog.photo_thumbnail,
                                    phone=dog.phone,
                                    zipcode=zipcode,
-                                   testdog = dog,
+                                   testdog=dog,
                                    dogs=dogs
                                    )
     dogs = petfinder.get_dogs(zipcode)
