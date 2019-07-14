@@ -53,7 +53,7 @@
                     {% endfor %}
                     <!-- End of test new properties in Dog class -->
                     <p>{{ testdog.environment }}</p>
-                    <p>{{ testdog.description }}</p>
+                    <p>{{ testdog.description | safe }}</p>
                     <p>{{ testdog.address }}</p>
                     <div class="d-flex justify-content-center m-3">
                         <h1>For more info, call: {{ phone }}!</h1>
