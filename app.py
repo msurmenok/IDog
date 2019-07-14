@@ -127,6 +127,10 @@ def user_fav_page():
     # grab the first user or return a 404 page
     return render_template('welcome.html', user=user)
 
+@app.route('/dog/<dog_id>')
+def check_out_dog(dog_id):
+    dog = petfinder.get_dog_by_id(dog_id)
+    return render_template('dog.html', dog=dog)
 
 @app.route('/logout')
 @login_required
