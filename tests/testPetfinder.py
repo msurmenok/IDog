@@ -16,12 +16,12 @@ class TestPetFinder(unittest.TestCase):
     # Returns true if _convert_to_dog function creates the same object of Dog
     # Test when all information is provided
     def test_convert_to_dog(self):
-        self.assertEqual(petfinder._convert_to_dog(self.input), Dog(45000754, 'CA1331', 'Golden Retriever', 'Husky', 'Young', 'Male', True, 'Cooper!', 'https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/45000754/4/?bust=1561690767&width=600', 'crazy4chows@sbcglobal.net', None,'Sacramento'))
+        self.assertEqual(petfinder._convert_to_dog(self.input), Dog(45000754, 'CA1331', 'Golden Retriever', 'Husky', 'Young', 'Male', True, 'Cooper!', 'https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/45000754/4/?bust=1561690767&width=600', 'crazy4chows@sbcglobal.net', None,'Sacramento', [], {'children': None, 'dogs': None, 'cats': None}, 'This handsome guy is Cooper!  He is around 1.5 - 2 years old. What a friendly, loving sweet dog. He...', 'Sacramento CA 95842'))
 
     # Returns true if _convert_to_dog function creates the same object of Dog
     # Test if no picture provided
     def test_convert_to_dog2(self):
-        self.assertEqual(petfinder._convert_to_dog(self.input2), Dog(45000754, 'CA1331', 'Golden Retriever', 'Husky', 'Young', 'Male', True, 'Cooper!', None, 'crazy4chows@sbcglobal.net', None,'Sacramento'))
+        self.assertEqual(petfinder._convert_to_dog(self.input2), Dog(45000754, 'CA1331', 'Golden Retriever', 'Husky', 'Young', 'Male', True, 'Cooper!', None, 'crazy4chows@sbcglobal.net', None,'Sacramento', [], {'children': None, 'dogs': None, 'cats': None}, 'This handsome guy is Cooper!  He is around 1.5 - 2 years old. What a friendly, loving sweet dog. He...', 'Sacramento CA 95842'))
 
 if __name__ == '__main__':
     unittest.main()
