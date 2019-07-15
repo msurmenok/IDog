@@ -37,12 +37,6 @@
                         <p>{{dog.gender}}</p>
                     </div>
                     <div class="col-sm">
-                        <h4>Spayed</h4>
-                        {% if dog.spayed == True %}
-                            <p>Yes</p>
-                        {% else %}
-                            <p>No</p>
-                        {% endif %}
                     </div>
                     <div class="col-sm">
                     </div>
@@ -55,7 +49,11 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                    <p>
+                    {% if dog.spayed == True %}
+                        Spayed: Yes<br>
+                    {% else %}
+                        No<br>
+                    {% endif %}
                     {% if dog.environment['children'] == True %}
                     Children friendly: Yes<br>
                     {% endif %}
