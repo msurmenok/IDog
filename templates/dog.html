@@ -6,7 +6,7 @@
 </div>
 <div class="container">
     <div class="media">
-        <div class="media-left media-middle">
+        <div class="media-left media-middle d-none d-lg-block">
             <img class="align-self-start mr-3" src="{{ dog.photo_thumbnail }}" alt="Dog Image" class="media-object">
         </div>
         <!-- Description -->
@@ -63,7 +63,7 @@
                     {% if dog.environment['cats'] == True %}
                     Cats friendly: Yes<br>
                     {% endif %}
-                    Description: {{dog.description}}
+                    Description: {{dog.description|safe}}
                     </p>
                     </div>
                 </div>
