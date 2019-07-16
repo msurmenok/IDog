@@ -174,6 +174,7 @@ def like_dog(dog_id):
         old_fav = Favorites.query.filter_by(user_id=current_user.id).filter_by(dog_id=dog_id).first()
         db.session.delete(old_fav)
     db.session.commit()
+    print(User.query.filter_by(id=current_user.id).first().favs)
     return redirect((url_for('index')))
 
 
