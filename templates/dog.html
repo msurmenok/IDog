@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% include "navbar.html" %}
+{%block content%}
+<div class="jumbotron">
+        <h1>Hi! I am {{dog.name}}</h1>
+</div>
+<div class="container">
+    <div class="media">
+        <div class="media-left media-middle d-none d-lg-block">
+            <img class="align-self-start mr-3" src="{{ dog.photo_thumbnail }}" alt="Dog Image" class="media-object">
+        </div>
+        <!-- Description -->
+        <div class="media-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <h4>Breed</h4>
+                        <p>{{dog.breed1}}<br>
+                            {% if dog.breed2 != None %}
+                                {{dog.breed2}}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-sm">
+                        <h4>Name</h4>
+                        <p>{{dog.name}}</p>
+                        </div>
+                    <div class="col-sm">
+                        <h4>Age</h4>
+                        <p>{{dog.age}}</p>
+                    </div>
+                </div>               
+
+                <div class="row">
+                    <div class="col-sm">
+                        <h4>Gender</h4>
+                        <p>{{dog.gender}}</p>
+                    </div>
+                    <div class="col-sm">
+                    </div>
+                    <div class="col-sm">
+                    </div>
+                </div>
+                <!-- More info row   -->
+                <div class="row">
+                    <div class="col-sm">
+                        <h5>More info:</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                    {% if dog.spayed == True %}
+                        Spayed: Yes<br>
+                    {% else %}
+                        No<br>
+                    {% endif %}
+                    {% if dog.environment['children'] == True %}
+                    Children friendly: Yes<br>
+                    {% endif %}
+                    {% if dog.environment['dogs'] == True %}
+                    Other dogs friendly: Yes<br>
+                    {% endif %}
+                    {% if dog.environment['cats'] == True %}
+                    Cats friendly: Yes<br>
+                    {% endif %}
+                    Description: {{dog.description|safe}}
+                    </p>
+                    </div>
+                </div>
+                <div class=row>
+                    <div class="col-sm">
+                        <h5>Contact info:</h5>
+                    </div>
+                </div>
+                <div class=row>
+                    <div class="col-sm">
+                        <p>Email: {{dog.email}} <br>
+                            Phone: {{dog.phone}} <br>
+                            Shelter address: {{dog.address}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+
+
+<div class="container grid-custom">
+    
+    <div class="row">
+        <h1>More images</h1>
+    </div>
+    <div class="row">
+        <div class="row">
+            {% for pic in dog.photos %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="thumbnail">
+                    <img src="{{ pic['medium'] }}" alt="Dog Image" class="img-responsive">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+</div>
+
+{%endblock%}

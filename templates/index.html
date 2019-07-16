@@ -49,7 +49,7 @@
                     </div>
                     <!-- Test new properties in Dog class -->
                     {% for pic in testdog.photos %}
-                        <img src="{{ pic["small"] }}">
+                        <img src="{{ pic['small'] }}">
                     {% endfor %}
                     <!-- End of test new properties in Dog class -->
                     <p>{{ testdog.environment }}</p>
@@ -78,14 +78,14 @@
             {% for dog in dogs %}
                 <div class="col-md-6 col-lg-4">
                     <div class="img-thumbnail dog-container">
-                        <a href="#/dog/{{ dog.id }}">
+                        <a href="{{url_for('check_out_dog', dog_id=dog.id)}}">
                             <div class="image">
                                 <span class="helper"></span>
                                 <img src="{{ dog.photo_thumbnail }}" alt="dog picture" class="dog-image" width="100%">
                             </div>
                         </a>
                         <div class="col-xs-12 lpad text-center">
-                            <a href="#/dog/{{ dog.id }}" class="name">{{ dog.name }}</a>
+                            <a href="{{url_for('check_out_dog', dog_id=dog.id)}}" class="name">{{ dog.name }}</a>
                             <a href="#"><img src="../static/like_sign_2x.png" width="35" alt="Add to favorites"></a>
                             <p>{{ dog.gender }} &bull; {{ dog.age }}</p>
                         </div>
