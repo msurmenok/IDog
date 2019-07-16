@@ -54,12 +54,15 @@ class PetFinderClient:
         """ Make GET Http request to PetFinder API with specified url and return uncleaned data """
         headers = {'Authorization': self.api_key}
         r = requests.get(url, headers=headers)
-        if r.status_code == 401:
-            # api key expired, get a new key
-            self.api_key = self._get_token()
-            print("Api key expired")
-            self._make_api_call(url)
+        if r.status_code == 200:
+            return r.json()
+        # api key expired, get a new key
+        self.api_key = self._get_token()
+        print("Api key expired")
+        headers = {'Authorization': self.api_key}
+        r = requests.get(url, headers=headers)
         return r.json()
+
 
     def _get_dogs_json_by_breed(self, breed, zipcode):
         """ Returns full dogs info of the specified breed near zipcode """
