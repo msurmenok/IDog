@@ -86,9 +86,17 @@
                         </a>
                         <div class="col-xs-12 lpad text-center">
                             <a href="{{ url_for('check_out_dog', dog_id=dog.id) }}" class="name">{{ dog.name }}</a>
-                            <a href="{{ url_for('like_dog', dog_id=dog.id) }}">
-                                <img src="../static/like_sign_2x.png" width="35" alt="Add to favorites">
-                            </a>
+                            {% if dog.id in fav_dogs %}
+                                <a href="{{ url_for('like_dog', dog_id=dog.id) }}">
+                                    <img src="../static/heart@2x.png" width="34"
+                                         alt="Remove from favorites">
+                                </a>
+                            {% else %}
+                                <a href="{{ url_for('like_dog', dog_id=dog.id) }}">
+                                    <img src="../static/heart@2x_empty.png" width="34"
+                                         alt="Add to favorites">
+                                </a>
+                            {% endif %}
                             <p>{{ dog.gender }} &bull; {{ dog.age }}</p>
                         </div>
                     </div>

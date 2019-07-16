@@ -44,6 +44,10 @@ def get_zipcode(request):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     zipcode = get_zipcode(request)
+    # If user logged in, get all his favorite dogs
+    fav_dogs = []
+    if current_user.is_authenticated:
+        fav_dogs = [dog.dog_id for dog in User.query.filter_by(id=current_user.id).first().favs]
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -75,10 +79,11 @@ def index():
                                    phone=dog.phone,
                                    zipcode=zipcode,
                                    testdog=dog,
-                                   dogs=dogs
+                                   dogs=dogs,
+                                   fav_dogs=fav_dogs
                                    )
     dogs = petfinder.get_dogs(zipcode)
-    return render_template('index.html', zipcode=zipcode, dogs=dogs)
+    return render_template('index.html', zipcode=zipcode, dogs=dogs, fav_dogs=fav_dogs)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -137,8 +142,6 @@ def check_out_dog(dog_id):
 @app.route('/like/<int:dog_id>')
 @login_required
 def like_dog(dog_id):
-    print(current_user)
-
     # Get all user dogs
     user_dogs = User.query.filter_by(id=current_user.id).first().favs
     user_dogs_ids = [dog.dog_id for dog in user_dogs]
@@ -147,9 +150,6 @@ def like_dog(dog_id):
     all_dogs = Dogs.query.all()
     all_dogs_ids = [dog.dog_id for dog in all_dogs]
 
-    print(user_dogs)
-    print(user_dogs_ids)
-    print((all_dogs_ids))
     # If dog is not in database yet, add it
     if dog_id not in all_dogs_ids:
         dog_data = petfinder.get_dog_by_id(dog_id)
@@ -174,8 +174,6 @@ def like_dog(dog_id):
         old_fav = Favorites.query.filter_by(user_id=current_user.id).filter_by(dog_id=dog_id).first()
         db.session.delete(old_fav)
     db.session.commit()
-    user_dogs = User.query.filter_by(id=current_user.id).first().favs
-    print(user_dogs)
     return redirect((url_for('index')))
 
 
