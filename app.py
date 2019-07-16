@@ -45,6 +45,11 @@ def get_zipcode(request):
 def index():
     zipcode = get_zipcode(request)
     if request.method == 'POST':
+        if 'zipcode' in request.form:
+            zipcode = request.form['zipcode']
+        if len(zipcode) != 5 or not zipcode.isdigit():
+            flash('Please input a valid zipcode')
+            return redirect(request.url)
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
@@ -53,15 +58,17 @@ def index():
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
+            # flash('No selected file')
+            # return redirect(request.url)
+            dogs = petfinder.get_dogs(zipcode)
+            return render_template("index.html", zipcode=zipcode, dogs=dogs)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
 
             if 'text' in request.form:
-                # zipcode = request.form['text']
+                # zipcode = request.form['zipcode']
                 zipcode = 94065  # default
                 # dog = get_dogs_by_breed(prediction, zipcode)[0]
                 dogs = petfinder.get_dogs_by_breed()  # default german shepard, 94065
