@@ -71,6 +71,7 @@ class PetFinderClient:
         url = "https://api.petfinder.com/v2/animals?type=dog&breed=%s&location=%s&distance=100&sort=distance&status=adoptable" % (
             breed, zipcode)
         data = self._make_api_call(url)
+        print(data)
         return data['animals']
 
     def _get_dogs_json(self, zipcode):

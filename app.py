@@ -71,11 +71,11 @@ def index():
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
 
-            if 'text' in request.form:
+            if 'zipcode' in request.form:
                 # zipcode = request.form['zipcode']
                 zipcode = 94065  # default
-                # dog = get_dogs_by_breed(prediction, zipcode)[0]
-                dogs = petfinder.get_dogs_by_breed()  # default german shepard, 94065
+                dogs = petfinder.get_dogs_by_breed("labrador retriever", zipcode)
+                # dogs = petfinder.get_dogs_by_breed()  # default german shepard, 94065
                 dog = dogs[0]
 
             return render_template("index.html",
