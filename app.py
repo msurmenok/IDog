@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from __init__ import app, db
 from model.load_model import run_model
 from forms import RegistrationForm, LoginForm
-from dbmodel import User
+from dbmodel import User, Favorites, Dogs
 from flask_login import login_user, login_required, logout_user, current_user
 from wtforms import validators
 
@@ -44,6 +44,10 @@ def get_zipcode(request):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     zipcode = get_zipcode(request)
+    # If user logged in, get all his favorite dogs
+    fav_dogs = []
+    if current_user.is_authenticated:
+        fav_dogs = [dog.dog_id for dog in User.query.filter_by(id=current_user.id).first().favs]
     if request.method == 'POST':
         if 'zipcode' in request.form:
             zipcode = request.form['zipcode']
@@ -82,10 +86,11 @@ def index():
                                    phone=dog.phone,
                                    zipcode=zipcode,
                                    testdog=dog,
-                                   dogs=dogs
+                                   dogs=dogs,
+                                   fav_dogs=fav_dogs
                                    )
     dogs = petfinder.get_dogs(zipcode)
-    return render_template('index.html', zipcode=zipcode, dogs=dogs)
+    return render_template('index.html', zipcode=zipcode, dogs=dogs, fav_dogs=fav_dogs)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -134,10 +139,51 @@ def user_fav_page():
     # grab the first user or return a 404 page
     return render_template('welcome.html', user=user)
 
+
 @app.route('/dog/<dog_id>')
 def check_out_dog(dog_id):
     dog = petfinder.get_dog_by_id(dog_id)
     return render_template('dog.html', dog=dog)
+
+
+@app.route('/like/<int:dog_id>')
+@login_required
+def like_dog(dog_id):
+    # Get all user dogs
+    user_dogs = User.query.filter_by(id=current_user.id).first().favs
+    user_dogs_ids = [dog.dog_id for dog in user_dogs]
+
+    # Get all existing dogs
+    all_dogs = Dogs.query.all()
+    all_dogs_ids = [dog.dog_id for dog in all_dogs]
+
+    # If dog is not in database yet, add it
+    if dog_id not in all_dogs_ids:
+        dog_data = petfinder.get_dog_by_id(dog_id)
+        new_dog = Dogs(
+            dog_id=dog_id,
+            dog_name=dog_data.name,
+            dog_gender=dog_data.gender,
+            dog_age=dog_data.age,
+            dog_pic=dog_data.photo_thumbnail
+        )
+        db.session.add(new_dog)
+        db.session.commit()
+    # If user already like this dog, remove from Favorites, otherwise add to favorites
+
+    if dog_id not in user_dogs_ids:
+        new_fav = Favorites(
+            user_id=current_user.id,
+            dog_id=dog_id
+        )
+        db.session.add(new_fav)
+    else:
+        old_fav = Favorites.query.filter_by(user_id=current_user.id).filter_by(dog_id=dog_id).first()
+        db.session.delete(old_fav)
+    db.session.commit()
+    print(User.query.filter_by(id=current_user.id).first().favs)
+    return redirect((url_for('index')))
+
 
 @app.route('/logout')
 @login_required
