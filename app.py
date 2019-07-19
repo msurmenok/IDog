@@ -11,6 +11,7 @@ from wtforms import validators
 import os
 import geoip2.database
 from petfinder import PetFinderClient
+from Dog import Dog
 
 os.environ['PYTHONPATH'] = os.getcwd()
 # UPLOAD_FOLDER = "/static"
@@ -137,7 +138,16 @@ def user_fav_page():
     # page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(email=current_user.email).first_or_404()
     # grab the first user or return a 404 page
-    return render_template('welcome.html', user=user)
+    fav_dogs_ids = [dog.dog_id for dog in User.query.filter_by(id=current_user.id).first().favs]
+    fav_dogs = Dogs.query.filter(Dogs.dog_id.in_(fav_dogs_ids)).all()
+    # Convert database info to Dog objects
+    dogs = [
+        Dog(id=fav_dog.dog_id, org_id=None, breed1=None, breed2=None, age=fav_dog.dog_age, gender=fav_dog.dog_gender,
+            spayed=None, name=fav_dog.dog_name, photo_thumbnail=fav_dog.dog_pic, email=None, phone=None, city=None,
+            photos=None, environment=None, description=None, address=None)
+        for fav_dog in fav_dogs]
+
+    return render_template('my_dogs.html', dogs=dogs, user=user, fav_dogs=fav_dogs_ids)
 
 
 @app.route('/dog/<dog_id>')
@@ -181,7 +191,6 @@ def like_dog(dog_id):
         old_fav = Favorites.query.filter_by(user_id=current_user.id).filter_by(dog_id=dog_id).first()
         db.session.delete(old_fav)
     db.session.commit()
-    print(User.query.filter_by(id=current_user.id).first().favs)
     return redirect((url_for('index')))
 
 
