@@ -10,6 +10,7 @@ from wtforms import validators
 
 import os
 import geoip2.database
+from random import randint
 from petfinder import PetFinderClient
 
 os.environ['PYTHONPATH'] = os.getcwd()
@@ -17,6 +18,17 @@ os.environ['PYTHONPATH'] = os.getcwd()
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                              'static/tmp')
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png'])
+CONVERSION_DICT = { "french_bulldog" : "French Bulldog",
+                    "german_shepherd" : "German Shepherd Dog",
+                    "golden_retriever" : "Golden Retriever",
+                    "labrador_retriever" : "Labrador Retriever"# ,
+                    # "yorkshire_terrier" : "Yorkshire Terrier",
+                    # "corgi" : "Corgi",
+                    # "beagle" : "Beagle",
+                    # "shih_tzu" : "Shih Tzu",
+                    # "siberian_husky" : "Siberian Husky",
+                    # "poodle" : "Poodle"
+                    }
 
 petfinder = PetFinderClient()
 
@@ -67,15 +79,22 @@ def index():
             dogs = petfinder.get_dogs(zipcode)
             return render_template("index.html", zipcode=zipcode, dogs=dogs)
         if file and allowed_file(file.filename):
+            # verify filename is secure
             filename = secure_filename(file.filename)
+
+            # adding random number from 1000-9999 to end of filename
+            filename = filename.rsplit('.', 1)[0].lower() \
+                        + str(randint(1000,9999)) + "." \
+                        + filename.rsplit('.', 1)[1].lower()
+
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             prediction = run_model(os.path.join(UPLOAD_FOLDER, filename))
-
-            if 'text' in request.form:
-                # zipcode = request.form['zipcode']
-                zipcode = 94065  # default
-                # dog = get_dogs_by_breed(prediction, zipcode)[0]
-                dogs = petfinder.get_dogs_by_breed()  # default german shepard, 94065
+            prediction = CONVERSION_DICT[prediction]
+            if 'zipcode' in request.form:
+                zipcode = request.form['zipcode']
+                # zipcode = 94065  # default
+                dogs = petfinder.get_dogs_by_breed(prediction, zipcode)
+                # dogs = petfinder.get_dogs_by_breed()  # default german shepard, 94065
                 dog = dogs[0]
 
             return render_template("index.html",
