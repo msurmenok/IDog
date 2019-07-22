@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% include "navbar.html" %}
 {%block content%}
-
 <div class="jumbotron">
         <h1>Hi! I am {{dog.name}}</h1>
 </div>
@@ -92,15 +91,15 @@
         <h1>More images</h1>
     </div>
     <div class="row">
-    
-        {% for pic in dog.photos %}
-        <div class="col-sm">
-            <div class="thumbnail ">
-                <img  src="{{ pic['medium'] }}" alt="Dog Image" class=" mx-auto d-block img-responsive ">
+        <div class="row">
+            {% for pic in dog.photos %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="thumbnail">
+                    <img src="{{ pic['medium'] }}" alt="Dog Image" class="img-responsive">
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    
     </div>
 
 </div>
