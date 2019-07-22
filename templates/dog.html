@@ -1,108 +1,122 @@
 {% extends "base.html" %}
-{% include "navbar.html" %}
-{%block content%}
-<div class="jumbotron">
-        <h1>Hi! I am {{dog.name}}</h1>
-</div>
-<div class="container">
-    <div class="media">
-        <div class="media-left media-middle d-none d-lg-block">
-            <img class="align-self-start mr-3" src="{{ dog.photo_thumbnail }}" alt="Dog Image" class="media-object">
-        </div>
-        <!-- Description -->
-        <div class="media-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <h4>Breed</h4>
-                        <p>{{dog.breed1}}<br>
-                            {% if dog.breed2 != None %}
-                                {{dog.breed2}}
-                            {% endif %}
-                        </p>
-                    </div>
-                    <div class="col-sm">
-                        <h4>Name</h4>
-                        <p>{{dog.name}}</p>
-                        </div>
-                    <div class="col-sm">
-                        <h4>Age</h4>
-                        <p>{{dog.age}}</p>
-                    </div>
-                </div>               
-
-                <div class="row">
-                    <div class="col-sm">
-                        <h4>Gender</h4>
-                        <p>{{dog.gender}}</p>
-                    </div>
-                    <div class="col-sm">
-                    </div>
-                    <div class="col-sm">
-                    </div>
-                </div>
-                <!-- More info row   -->
-                <div class="row">
-                    <div class="col-sm">
-                        <h5>More info:</h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm">
-                    {% if dog.spayed == True %}
-                        Spayed: Yes<br>
-                    {% else %}
-                        No<br>
-                    {% endif %}
-                    {% if dog.environment['children'] == True %}
-                    Children friendly: Yes<br>
-                    {% endif %}
-                    {% if dog.environment['dogs'] == True %}
-                    Other dogs friendly: Yes<br>
-                    {% endif %}
-                    {% if dog.environment['cats'] == True %}
-                    Cats friendly: Yes<br>
-                    {% endif %}
-                    Description: {{dog.description|safe}}
-                    </p>
-                    </div>
-                </div>
-                <div class=row>
-                    <div class="col-sm">
-                        <h5>Contact info:</h5>
-                    </div>
-                </div>
-                <div class=row>
-                    <div class="col-sm">
-                        <p>Email: {{dog.email}} <br>
-                            Phone: {{dog.phone}} <br>
-                            Shelter address: {{dog.address}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>       
+{% block content %}
+    {% include "navbar.html" %}
+    <div class="jumbotron">
+        <h1>Hi! I am {{ dog.name }}</h1>
     </div>
-
-
-<div class="container grid-custom">
-    
-    <div class="row">
-        <h1>More images</h1>
-    </div>
-    <div class="row">
+    <div class="container">
         <div class="row">
-            {% for pic in dog.photos %}
-            <div class="col-lg-4 col-sm-6">
-                <div class="thumbnail">
-                    <img src="{{ pic['medium'] }}" alt="Dog Image" class="img-responsive">
+            <!-- Description -->
+            <div class="col-sm-12 col-md-6 order-md-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h4>Breed</h4>
+                            <p>{{ dog.breed1 }}<br>
+                                {% if dog.breed2 != None %}
+                                    {{ dog.breed2 }}
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-sm">
+                            <h4>Name</h4>
+                            <p>{{ dog.name }}</p>
+                        </div>
+                        <div class="col-sm">
+                            <h4>Age</h4>
+                            <p>{{ dog.age }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <h4>Gender</h4>
+                            <p>{{ dog.gender }}</p>
+                        </div>
+                        <div class="col-sm">
+                        </div>
+                        <div class="col-sm">
+                        </div>
+                    </div>
+                    <!-- More info row   -->
+                    <div class="row">
+                        <div class="col-sm">
+                            <h5>More info:</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            {% if dog.spayed == True %}
+                                Spayed: Yes<br>
+                            {% else %}
+                                No<br>
+                            {% endif %}
+                            {% if dog.environment['children'] == True %}
+                                Children friendly: Yes<br>
+                            {% endif %}
+                            {% if dog.environment['dogs'] == True %}
+                                Other dogs friendly: Yes<br>
+                            {% endif %}
+                            {% if dog.environment['cats'] == True %}
+                                Cats friendly: Yes<br>
+                            {% endif %}
+                            Description: {{ dog.description|safe }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class=row>
+                        <div class="col-sm">
+                            <h5>Contact info:</h5>
+                        </div>
+                    </div>
+                    <div class=row>
+                        <div class="col-sm">
+                            <p>Email: {{ dog.email }} <br>
+                                Phone: {{ dog.phone }} <br>
+                                Shelter address: {{ dog.address }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
+            <div class="col-sm-12 col-md-6 order-md-1">
+                <div id="dog-carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        {% for pic in dog.photos %}
+                            {% if (loop.index - 1) == 0 %}
+                                <li data-target="#dog-carousel" data-slide-to="{{ loop.index - 1 }}" class="active">
+                                </li>
+                            {% else %}
+                                <li data-target="#dog-carousel" data-slide-to="{{ loop.index - 1 }}">
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        {% for pic in dog.photos %}
+                            {% if (loop.index - 1) == 0 %}
+                                <div class="carousel-item active">
+                                    <img src="{{ pic['large'] }}" alt="Dog Image">
+                                </div>
+                            {% else %}
+                                <div class="carousel-item">
+                                    <img src="{{ pic['large'] }}" alt="Dog Image">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#dog-carousel" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#dog-carousel" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-</div>
-</div>
-
-{%endblock%}
+{% endblock %}
