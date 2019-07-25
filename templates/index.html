@@ -18,19 +18,19 @@
         </div>
     {% endfor %}
     <div class="container-fluid">
-            <div class="row hero d-lg-block"> 
-                <div class="row vpad d-none d-md-block"></div>
-                <div class="row">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-6">
-                        <p>Lorem ipsum accumsan dui massa viverra curabitur libero per fermentum cubilia, fusce nunc urna
-                            quisque tortor ut ultricies sit malesuada mi, ac suscipit conubia placerat erat
-                        </p>
-                    </div>       
+        <div class="row hero d-lg-block">
+            <div class="row vpad d-none d-md-block"></div>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-6">
+                    <p>Lorem ipsum accumsan dui massa viverra curabitur libero per fermentum cubilia, fusce nunc urna
+                        quisque tortor ut ultricies sit malesuada mi, ac suscipit conubia placerat erat
+                    </p>
                 </div>
-                <div class="row hero-image mx-auto d-md-block d-none"></div>
+            </div>
+            <div class="row hero-image mx-auto d-md-block d-none"></div>
         </div>
-        
+
     </div>
     <div class="container">
         <div class="row mt-5">
@@ -89,7 +89,8 @@
                             </div>
                         </a>
                         <div class="col-xs-12 lpad text-center">
-                            <a href="{{ url_for('check_out_dog', dog_id=dog.id) }}" class="name">{{ dog.name }}</a>
+                            <a href="{{ url_for('check_out_dog', dog_id=dog.id) }}"
+                               class="name">{{ dog.name }}</a>
                             {% if current_user.is_authenticated %}
                                 {% if dog.id in fav_dogs %}
                                     <a title="Remove from favorites" href="#!">

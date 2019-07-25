@@ -107,6 +107,9 @@ def _convert_to_dog(element):
     address = address_line1 + " " + address_line2 + " " + \
               element["contact"]["address"]["city"] + " " + element["contact"]["address"]["state"] + \
               " " + element["contact"]["address"]["postcode"]
+    name = element["name"]
+    if len(name) > 22:
+        name = name[:21]
 
     return Dog(element["id"],
                element["organization_id"],
@@ -115,7 +118,7 @@ def _convert_to_dog(element):
                element["age"],
                element["gender"],
                element["attributes"]["spayed_neutered"],
-               element["name"],
+               name,
                photo_thumbnail,
                element["contact"]["email"],
                element["contact"]["phone"],
