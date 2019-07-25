@@ -121,3 +121,7 @@
 .unliked_dog {
     content: url("../heart@2x_empty.png");
 }
+
+.jumbotron {
+    background-color: #e7e0de;
+}
