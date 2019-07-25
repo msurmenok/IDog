@@ -77,6 +77,39 @@
                             </p>
                         </div>
                     </div>
+
+                    <div id="map" style="height:250px;margin:25px"></div>
+                    <script>
+                      function initMap() {
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                          zoom: 12,
+                          // center: {lat: 0, lng: 0}
+                        });
+                        var geocoder = new google.maps.Geocoder();
+                        var address = '{{ dog.address }}';
+                        geocodeAddress(geocoder, address, map);
+                      }
+
+                      function geocodeAddress(geocoder, address, resultsMap) {
+                        alert(address);
+                        geocoder.geocode({'address': address}, function(results, status) {
+                          if (status === 'OK') {
+                            resultsMap.setCenter(results[0].geometry.location);
+                            var marker = new google.maps.Marker({
+                              map: resultsMap,
+                              position: results[0].geometry.location
+                            });
+                          } else {
+                            alert('Geocode was not successful for the following reason: ' + status);
+                          }
+                        });
+                      }
+                    </script>
+
+                    <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJGUlA2HOG6yNh_90V8DH8zpbl0bedvwQ&callback=initMap">
+                    </script>
+
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 order-md-1">
@@ -118,5 +151,11 @@
             </div>
         </div>
     </div>
+
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
 
 {% endblock %}
