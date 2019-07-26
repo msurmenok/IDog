@@ -22,20 +22,16 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = credentials.app_sign_up_key
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://localhost/idog2'
+
+username = credentials.username
+password = credentials.password
+app.config[
+    'SQLALCHEMY_DATABASE_URI'] = 'postgresql://' + username + ':' + password +\
+         '@localhost:5432/idog2'
 app.config[
     'SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Don't want to track every modification
 
 db = SQLAlchemy(app)
-
-
-# @event.listens_for(Engine, "connect")
-# def _set_sqlite_pragma(dbapi_connection, connection_record):
-#     if isinstance(dbapi_connection, SQLite3Connection):
-#         cursor = dbapi_connection.cursor()
-#         cursor.execute("PRAGMA foreign_keys=ON;")
-#         cursor.close()
-
 
 Migrate(app, db)
 login_manager.init_app(app)
