@@ -18,7 +18,9 @@ class PetFinderClient:
         data = self._get_dogs_json_by_breed(breed, zipcode)
         dogs = []
         for el in data:
-            dogs.append(_convert_to_dog(el))
+            dog = _convert_to_dog(el)
+            if dog.photo_thumbnail is not None:
+                dogs.append(dog)
         return dogs
 
     def get_dogs(self, zipcode="94063"):
@@ -28,7 +30,9 @@ class PetFinderClient:
         data = self._get_dogs_json(zipcode)
         dogs = []
         for el in data:
-            dogs.append(_convert_to_dog(el))
+            dog = _convert_to_dog(el)
+            if dog.photo_thumbnail is not None:
+                dogs.append(dog)
         return dogs
 
     def get_dog_by_id(self, id="43736184"):
@@ -62,7 +66,6 @@ class PetFinderClient:
         headers = {'Authorization': self.api_key}
         r = requests.get(url, headers=headers)
         return r.json()
-
 
     def _get_dogs_json_by_breed(self, breed, zipcode):
         """ Returns full dogs info of the specified breed near zipcode """
@@ -107,6 +110,9 @@ def _convert_to_dog(element):
     address = address_line1 + " " + address_line2 + " " + \
               element["contact"]["address"]["city"] + " " + element["contact"]["address"]["state"] + \
               " " + element["contact"]["address"]["postcode"]
+    name = element["name"]
+    if len(name) > 22:
+        name = name[:21]
 
     return Dog(element["id"],
                element["organization_id"],
@@ -115,7 +121,7 @@ def _convert_to_dog(element):
                element["age"],
                element["gender"],
                element["attributes"]["spayed_neutered"],
-               element["name"],
+               name,
                photo_thumbnail,
                element["contact"]["email"],
                element["contact"]["phone"],
