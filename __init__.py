@@ -22,20 +22,19 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = credentials.app_sign_up_key
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(
-    basedir, 'data.sqlite')  # sets database location
+app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://localhost/idog2'
 app.config[
     'SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Don't want to track every modification
 
 db = SQLAlchemy(app)
 
 
-@event.listens_for(Engine, "connect")
-def _set_sqlite_pragma(dbapi_connection, connection_record):
-    if isinstance(dbapi_connection, SQLite3Connection):
-        cursor = dbapi_connection.cursor()
-        cursor.execute("PRAGMA foreign_keys=ON;")
-        cursor.close()
+# @event.listens_for(Engine, "connect")
+# def _set_sqlite_pragma(dbapi_connection, connection_record):
+#     if isinstance(dbapi_connection, SQLite3Connection):
+#         cursor = dbapi_connection.cursor()
+#         cursor.execute("PRAGMA foreign_keys=ON;")
+#         cursor.close()
 
 
 Migrate(app, db)
