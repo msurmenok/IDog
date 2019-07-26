@@ -80,39 +80,76 @@
 
                     <div id="map" style="height:250px;margin:25px"></div>
                     <script>
-                      function initMap() {
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                          zoom: 12,
-                          // center: {lat: 0, lng: 0}
-                        });
-                        var geocoder = new google.maps.Geocoder();
-                        var address = '{{ dog.address }}';
-                        geocodeAddress(geocoder, address, map);
-                      }
-
-                      function geocodeAddress(geocoder, address, resultsMap) {
-                        alert(address);
-                        geocoder.geocode({'address': address}, function(results, status) {
-                          if (status === 'OK') {
-                            resultsMap.setCenter(results[0].geometry.location);
-                            var marker = new google.maps.Marker({
-                              map: resultsMap,
-                              position: results[0].geometry.location
+                        function initMap() {
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 12,
+                                // center: {lat: 0, lng: 0}
                             });
-                          } else {
-                            alert('Geocode was not successful for the following reason: ' + status);
-                          }
-                        });
-                      }
+                            var geocoder = new google.maps.Geocoder();
+                            var address = '{{ dog.address }}';
+                            geocodeAddress(geocoder, address, map);
+                        }
+
+                        function geocodeAddress(geocoder, address, resultsMap) {
+                            //alert(address);
+                            geocoder.geocode({'address': address}, function (results, status) {
+                                if (status === 'OK') {
+                                    resultsMap.setCenter(results[0].geometry.location);
+                                    var marker = new google.maps.Marker({
+                                        map: resultsMap,
+                                        position: results[0].geometry.location
+                                    });
+                                } else {
+                                    alert('Geocode was not successful for the following reason: ' + status);
+                                }
+                            });
+                        }
                     </script>
 
                     <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJGUlA2HOG6yNh_90V8DH8zpbl0bedvwQ&callback=initMap">
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJGUlA2HOG6yNh_90V8DH8zpbl0bedvwQ&callback=initMap">
                     </script>
 
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 order-md-1">
+            <div class="col-sm-12 col-md-6 order-md-1 d-lg-none">
+                <div id="dog-carousel-small" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        {% for pic in dog.photos %}
+                            {% if (loop.index - 1) == 0 %}
+                                <li data-target="#dog-carousel-small" data-slide-to="{{ loop.index - 1 }}" class="active">
+                                </li>
+                            {% else %}
+                                <li data-target="#dog-carousel-small" data-slide-to="{{ loop.index - 1 }}">
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        {% for pic in dog.photos %}
+                            {% if (loop.index - 1) == 0 %}
+                                <div class="carousel-item active">
+                                    <img src="{{ pic['medium'] }}" class="mx-auto d-block" alt="Dog Image">
+                                </div>
+                            {% else %}
+                                <div class="carousel-item">
+                                    <img src="{{ pic['medium'] }}" class="mx-auto d-block" alt="Dog Image">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#dog-carousel-small" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#dog-carousel-small" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 order-md-1 d-none d-lg-block">
                 <div id="dog-carousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ul class="carousel-indicators">
@@ -131,11 +168,11 @@
                         {% for pic in dog.photos %}
                             {% if (loop.index - 1) == 0 %}
                                 <div class="carousel-item active">
-                                    <img src="{{ pic['large'] }}" alt="Dog Image">
+                                    <img src="{{ pic['large'] }}" class="mx-auto d-block" alt="Dog Image">
                                 </div>
                             {% else %}
                                 <div class="carousel-item">
-                                    <img src="{{ pic['large'] }}" alt="Dog Image">
+                                    <img src="{{ pic['large'] }}" class="mx-auto d-block" alt="Dog Image">
                                 </div>
                             {% endif %}
                         {% endfor %}
