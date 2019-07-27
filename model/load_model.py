@@ -16,11 +16,28 @@ from pathlib import Path
 
 #path = os.path.dirname(os.path.realpath(__file__))
 
+# 4 breeds dict
+
+# breeds_dict = {
+#     'french_bulldog': 0,
+#     'german_shepherd': 1,
+#     'golden_retriever': 2,
+#     'labrador_retriever': 3
+# }
+
+# 10 breeds dict
+
 breeds_dict = {
-    'french_bulldog': 0,
-    'german_shepherd': 1,
-    'golden_retriever': 2,
-    'labrador_retriever': 3
+    'beagle': 0, 
+    'corgi': 1, 
+    'french_bulldog': 2, 
+    'german_shepherd': 3, 
+    'golden_retriever': 4, 
+    'labrador_retriever': 5, 
+    'poodle': 6, 
+    'shih_tzu': 7, 
+    'siberian_husky': 8, 
+    'yorkshire_terrier': 9
 }
 
 
@@ -39,7 +56,7 @@ def load_model(model_file_name):
     device = torch.device('cpu')
     model = torchvision.models.resnet18(pretrained=True)
     num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, 4)
+    model.fc = nn.Linear(num_ftrs, 10)
     model.load_state_dict(
         torch.load(os.path.join(path, model_file_name), map_location=device))
     model.eval()
@@ -88,7 +105,8 @@ def predict(model, processed_image):
 
 
 def run_model(image_path):
-    model = load_model('trained_model_Jun21.pth')
+    # model = load_model('trained_model_Jun21.pth')
+    model = load_model('trained_model_July22.pth')
     image = process_image(image_path)
     prediction = predict(model, image)
     return list(breeds_dict.keys())[prediction]
@@ -102,7 +120,8 @@ def main():
     #     'golden_retriever': 2,
     #     'labrador_retriever': 3
     # }
-    model = load_model('trained_model_Jun21.pth')
+    # model = load_model('trained_model_Jun21.pth')
+    model = load_model('trained_model_July22.pth')
     # image = process_image(
     #     '/Users/jing/Documents/school/2019Summer/software engineering/dog-breed-identification/test_images/image1.jpg'
     # )  ## Change here to be the image path.

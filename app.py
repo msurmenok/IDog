@@ -22,13 +22,13 @@ ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png'])
 CONVERSION_DICT = { "french_bulldog" : "French Bulldog",
                     "german_shepherd" : "German Shepherd Dog",
                     "golden_retriever" : "Golden Retriever",
-                    "labrador_retriever" : "Labrador Retriever"# ,
-                    # "yorkshire_terrier" : "Yorkshire Terrier",
-                    # "corgi" : "Corgi",
-                    # "beagle" : "Beagle",
-                    # "shih_tzu" : "Shih Tzu",
-                    # "siberian_husky" : "Siberian Husky",
-                    # "poodle" : "Poodle"
+                    "labrador_retriever" : "Labrador Retriever",
+                    "yorkshire_terrier" : "Yorkshire Terrier",
+                    "corgi" : "Corgi",
+                    "beagle" : "Beagle",
+                    "shih_tzu" : "Shih Tzu",
+                    "siberian_husky" : "Siberian Husky",
+                    "poodle" : "Poodle"
                     }
 
 petfinder = PetFinderClient()
