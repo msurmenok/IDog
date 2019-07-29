@@ -113,3 +113,5 @@ static/tmp/
 
 # IDE
 .idea
+
+migrations
