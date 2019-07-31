@@ -84,7 +84,6 @@ class PetFinderClient:
             zipcode)
         data = self._make_api_call(url)
         if 'animals' in data:
-            print(data['animals'])
             return data['animals']
         return []
 
