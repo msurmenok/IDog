@@ -113,6 +113,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+h1 .fa {
+    margin-bottom: -5px;
+}
+
 .liked_dog {
     content: url("../heart@2x.png");
 

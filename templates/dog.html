@@ -2,7 +2,29 @@
 {% block content %}
     {% include "navbar.html" %}
     <div class="jumbotron">
-        <h1>Hi! I am {{ dog.name }}</h1>
+        <h1>Hi! I am {{ dog.name }}
+            {% if current_user.is_authenticated %}
+                {% if dog.id in fav_dogs %}
+                    <a title="Remove from favorites" href="#!">
+                        <!--<img src="../static/heart@2x.png" width="34"
+                             alt="Remove from favorites">-->
+                        <i onclick="likeDog(this, {{ dog.id }})" class="fa liked_dog"></i>
+                    </a>
+                {% else %}
+                    <a title="Add to favorites" href="#!">
+                        <!--<img src="../static/heart@2x_empty.png" width="34"
+                             alt="Add to favorites">-->
+                        <i onclick="likeDog(this, {{ dog.id }})" class="fa unliked_dog"></i>
+                    </a>
+                {% endif %}
+            {% else %}
+                <a title="You should log in to add to Favorites" href="{{ url_for('login') }}">
+                    <!--<img src="../static/heart@2x_empty.png" width="34"
+                         alt="Add to favorites">-->
+                    <i class="fa unliked_dog"></i>
+                </a>
+            {% endif %}
+        </h1>
     </div>
     <div class="container">
         <div class="row">
@@ -118,7 +140,8 @@
                     <ul class="carousel-indicators">
                         {% for pic in dog.photos %}
                             {% if (loop.index - 1) == 0 %}
-                                <li data-target="#dog-carousel-small" data-slide-to="{{ loop.index - 1 }}" class="active">
+                                <li data-target="#dog-carousel-small" data-slide-to="{{ loop.index - 1 }}"
+                                    class="active">
                                 </li>
                             {% else %}
                                 <li data-target="#dog-carousel-small" data-slide-to="{{ loop.index - 1 }}">
