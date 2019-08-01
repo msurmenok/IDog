@@ -91,7 +91,10 @@ class PetFinderClient:
         """ Return full info for a single dog based on its id in PetFinder API """
         url = "https://api.petfinder.com/v2/animals/%s" % id
         data = self._make_api_call(url)
-        return data['animal']
+        if 'animal' in data:
+            return data['animal']
+        print("No such animal")
+        return []
 
 
 # Functions defined below this point should not be used directly in the other parts of the app
