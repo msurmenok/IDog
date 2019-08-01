@@ -129,3 +129,8 @@ h1 .fa {
 .jumbotron {
     background-color: #e7e0de;
 }
+
+#dog-carousel-small {
+    height: 300px;
+    overflow: hidden;
+}
