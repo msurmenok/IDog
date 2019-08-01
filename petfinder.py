@@ -81,14 +81,14 @@ class PetFinderClient:
 
     def _get_dogs_json(self, zipcode):
         """ Return full info for all type of dogs near zipcode """
-        url = "https://api.petfinder.com/v2/animals?type=dog&location=%s&distance=30&sort=distance&status=adoptable" % (
+        url = "https://api.petfinder.com/v2/animals?type=dog&location=%s&distance=20&sort=distance&status=adoptable" % (
             zipcode)
         data = self._make_api_call(url)
         print(data['pagination'])
         total_pages = data['pagination']['total_pages']
         print(total_pages)
         random_page = randint(1, total_pages)
-        random_url = "https://api.petfinder.com/v2/animals?type=dog&location=%s&distance=30&sort=distance&status=adoptable&page=%d" % (
+        random_url = "https://api.petfinder.com/v2/animals?type=dog&location=%s&distance=20&sort=distance&status=adoptable&page=%d" % (
             zipcode, random_page)
         print(random_page)
         data = self._make_api_call(random_url)
