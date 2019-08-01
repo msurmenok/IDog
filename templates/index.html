@@ -22,10 +22,14 @@
             <div class="row vpad d-none d-md-block"></div>
             <div class="row">
                 <div class="col-sm-1"></div>
-                <div class="col-sm-6">
-                    <p>Lorem ipsum accumsan dui massa viverra curabitur libero per fermentum cubilia, fusce nunc urna
-                        quisque tortor ut ultricies sit malesuada mi, ac suscipit conubia placerat erat
+                <div class="col-sm-6 m-3">
+                    <h2>Identifying dog breeds is easy using IDog!</h2>
+                    <p>Upload or take a photo of a dog, and get a prediction of its breed
+                      as well as profiles of similar dogs available for adoption at a
+                      shelter near you.
                     </p>
+
+                    <p>Create an account to save profiles of dogs that you like!</p>
                 </div>
             </div>
             <div class="row hero-image mx-auto d-md-block d-none"></div>
@@ -37,7 +41,7 @@
             <div class="col-xs-12 feature text-center">
                 {% if breed is defined %}
                     <div class="d-flex justify-content-center m-3">
-                        <h2>It is a {{ breed }}!</h2>
+                        <h2>Our prediction: {{ breed }}</h2>
                     </div>
                     <div class="d-flex justify-content-center m-3">
                         <img style="max-height:500px;max-width:400px;height:100%;width:100%;"

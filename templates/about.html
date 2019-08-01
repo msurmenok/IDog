@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+    {% include "navbar.html" %}
+    <div class="container">
+        <div class="row mt-5">
+
+          <div class="container mt-5">
+            <div class="row justify-content-center">
+              <h1>About</h1>
+            </div>
+            <div class="row justify-content-center">
+              <p> IDog was created from scratch in 5 weeks during Summer 2019 as a project for CS 160: Software Engineering at SJSU.</p>
+            </div>
+          </div>
+          <div class="container mt-5">
+            <div class="row justify-content-center">
+              <h1>The Team</h1>
+            </div>
+          </div>
+          <div class="container mt-5">
+            <!-- Three columns of text below the carousel -->
+            <div class="row justify-content-center">
+              <div class="col-sm-12 col-md-6 order-md-2 col-lg-4">
+                <div class="text-center">
+
+                  <img class="rounded-circle img-fluid" src="/static/joseph.jpg" alt="Joseph" width="140" height="140">
+                  <h2>Joseph Lee</h2>
+
+                  <a href="https://www.linkedin.com/in/joseph-lee-35205596/" title="Joseph LinkedIn"><img src="/static/linkedin.svg" height=69px></a>
+                  <a href="https://github.com/jlee7x2" title="Joseph Github"><img src="/static/github.png" height=40px></a>
+                </div>
+
+                <!-- <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p> -->
+              </div><!-- /.col-lg-4 -->
+              <div class="col-sm-12 col-md-6 order-md-2 col-lg-4">
+                <div class="text-center">
+                  <img class="rounded-circle" src="/static/jing.jpg" alt="Jing" width="140" height="140">
+                  <h2>Jing Zhao</h2>
+                  <a href="https://www.linkedin.com/in/jing-zhao-55169138/" title="Jing LinkedIn"><img src="/static/linkedin.svg" height=69px></a>
+                  <a href="https://github.com/joymyhome" title="Jing Github"><img src="/static/github.png" height=40px></a>
+                </div>
+              </div><!-- /.col-lg-4 -->
+              <div class="col-sm-12 col-md-6 order-md-2 col-lg-4">
+                <div class="text-center">
+                  <img class="rounded-circle" src="/static/maria.jpg" alt="Maria" width="140" height="140">
+                  <h2>Maria Surmenok</h2>
+                  <a href="https://www.linkedin.com/in/mariia-surmenok/" title="Maria LinkedIn"><img src="/static/linkedin.svg" height=69px></a>
+                  <a href="https://github.com/msurmenok" title="Maria Github"><img src="/static/github.png" height=40px></a>
+                </div>
+              </div><!-- /.col-lg-4 -->
+            </div><!-- /.row -->
+          </div>
+          <div class="container mt-5">
+            <div class="row justify-content-center">
+              <p> Check out the source code <a href="https://github.com/msurmenok/IDog">here</a>.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+{% endblock %}
