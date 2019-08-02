@@ -101,11 +101,7 @@ def index():
             return render_template("index.html",
                                    breed=prediction,
                                    path=filename,
-                                   # name=dog.name,
-                                   # dogpath=dog.photo_thumbnail,
-                                   # phone=dog.phone,
-                                   # zipcode=zipcode,
-                                   # testdog=dog,
+                                   zipcode=zipcode,
                                    dogs=dogs,
                                    fav_dogs=fav_dogs
                                    )
