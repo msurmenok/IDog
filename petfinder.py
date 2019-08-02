@@ -73,7 +73,7 @@ class PetFinderClient:
         """ Returns full dogs info of the specified breed near zipcode """
         # Replace space symbols with %20
         breed = urllib.parse.quote(breed)
-        url = "https://api.petfinder.com/v2/animals?type=dog&breed=%s&location=%s&distance=10&sort=distance&status=adoptable" % (
+        url = "https://api.petfinder.com/v2/animals?type=dog&breed=%s&location=%s&distance=500&sort=distance&status=adoptable" % (
             breed, zipcode)
         data = self._make_api_call(url)
         if 'animals' in data:
@@ -88,7 +88,6 @@ class PetFinderClient:
 
         if 'pagination' in data:
             total_pages = data['pagination']['total_pages']
-            print(total_pages)
             random_page = randint(1, total_pages)
             random_url = "https://api.petfinder.com/v2/animals?type=dog&location=%s&distance=10&sort=distance&status=adoptable&page=%d" % (
                 zipcode, random_page)

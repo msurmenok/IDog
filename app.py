@@ -96,16 +96,16 @@ def index():
                 # zipcode = 94065  # default
                 dogs = petfinder.get_dogs_by_breed(prediction, zipcode)
                 # dogs = petfinder.get_dogs_by_breed()  # default german shepard, 94065
-                dog = dogs[0]
+                #dog = dogs[0]
 
             return render_template("index.html",
                                    breed=prediction,
                                    path=filename,
-                                   name=dog.name,
-                                   dogpath=dog.photo_thumbnail,
-                                   phone=dog.phone,
-                                   zipcode=zipcode,
-                                   testdog=dog,
+                                   # name=dog.name,
+                                   # dogpath=dog.photo_thumbnail,
+                                   # phone=dog.phone,
+                                   # zipcode=zipcode,
+                                   # testdog=dog,
                                    dogs=dogs,
                                    fav_dogs=fav_dogs
                                    )
