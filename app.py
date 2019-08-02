@@ -174,11 +174,14 @@ def user_fav_page():
 
 @app.route('/dog/<dog_id>')
 def check_out_dog(dog_id):
-    fav_dogs = []
-    if current_user.is_authenticated:
-        fav_dogs = [dog.dog_id for dog in User.query.filter_by(id=current_user.id).first().favs]
-    dog = petfinder.get_dog_by_id(dog_id)
-    return render_template('dog.html', dog=dog, fav_dogs=fav_dogs)
+    try:
+        fav_dogs = []
+        if current_user.is_authenticated:
+            fav_dogs = [dog.dog_id for dog in User.query.filter_by(id=current_user.id).first().favs]
+        dog = petfinder.get_dog_by_id(dog_id)
+        return render_template('dog.html', dog=dog, fav_dogs=fav_dogs)
+    except:
+        return redirect((url_for('index')))
 
 
 @app.route('/like/<int:dog_id>')
