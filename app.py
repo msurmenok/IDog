@@ -117,7 +117,7 @@ def signup():
                     username=form.username.data,
                     password=form.password.data)
         try:
-            form.check_email(form.email)
+            form.check_email(form.email, form.username)
             flash("Thank for registration!")
         except validators.ValidationError as e:
             flash(str(e))
