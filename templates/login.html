@@ -4,13 +4,13 @@
 {% from "_formhelpers.html" import render_field %}
 {% for message in get_flashed_messages()%}
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>{{message}}</strong> 
+    <strong>{{message}}</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
 </div>
 {% endfor %}
-<h1 class='text-center'> Welcome to the login page!</h1>
+<h1 class='text-center m-5'> Login</h1>
 <form method="post" style='width:200px; margin:auto'>
     {{form.hidden_tag()}}
     <div class='form-group'>
